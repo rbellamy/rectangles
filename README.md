@@ -1,7 +1,7 @@
 # Rectangles
 
 Like most software developers, I try to avoid the "Not Invented Here" syndrome. In my experience, it's rarely as simple
-as reading about it in "Build or Buy" best practices article.
+as reading about it in a "Build or Buy" best practices article.
 
 For instance, this exercise. In taking the path I did, I choose to showcase my ability to integrate a new (for me)
 library into existing requirements, rather than attempting to meet those requirements from first principles. In doing so
@@ -14,7 +14,7 @@ lift to get to a working prototype.
 
 The requirements do not mention dealing with rectangles that are oriented off-axis, e.g., the segments of the rectangle
 are neither parallel to, nor perpendicular to, the x or y-axis. This implementation will work with rectangles of
-arbitrary orientation, though I haven't provided any tests to prove it.
+arbitrary orientation.
 
 The [`Rectangle`][rectangle-entity] entity wraps the functionality provided by
 the [Esri Geometry API for Java][esri-geometry-api-java], which is released under an Apache 2.0 license.

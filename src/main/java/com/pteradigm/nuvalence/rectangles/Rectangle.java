@@ -19,9 +19,17 @@ public class Rectangle {
 	 * @param y4 y coordinate of the lower left corner
 	 */
 	public Rectangle(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
-		double c1 = Math.sqrt(Math.pow(x1 - x3, 2) + Math.pow(y1 - y3, 2));
-		double c2 = Math.sqrt(Math.pow(x2 - x4, 2) + Math.pow(y2 - y4, 2));
-		if (Math.abs(c1 - c2) <= 0.000001) {
+		Point2D a = new Point2D(x1, y1);
+		Point2D b = new Point2D(x2, y2);
+		Point2D c = new Point2D(x3, y3);
+		Point2D d = new Point2D(x4, y4);
+		// the diagonals must be of equal length
+		// the points must not be collinear
+		double c1 = Math.sqrt(Point2D.sqrDistance(a, c));
+		double c2 = Math.sqrt(Point2D.sqrDistance(b, d));
+		if (Math.abs(c1 - c2) <= 0.000001 &&
+		    (Point2D.orientationRobust(a, b, c) != 0 &&
+		     Point2D.orientationRobust(c, d, a) != 0)) {
 			Polygon polygon = new Polygon();
 			polygon.startPath(x1, y1);
 			polygon.lineTo(x2, y2);
