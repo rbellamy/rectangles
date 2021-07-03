@@ -3,12 +3,8 @@ package com.pteradigm.nuvalence.rectangles;
 import com.esri.core.geometry.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class Rectangle {
 	private final Polygon polygon;
-	// Create a spatial reference object for GCS_WGS_1984. Because, why not?
-	private final SpatialReference sr = SpatialReference.create(4326);
 
 	/**
 	 * Creates a {@link Rectangle} using four points for each vertex, moving clockwise from the first point.
@@ -37,25 +33,17 @@ public class Rectangle {
 		}
 	}
 
-	public Polygon getPolygon() {
-		return polygon;
-	}
-
-	public SpatialReference getSpatialReference() {
-		return sr;
-	}
-
 	public boolean intersects(@NotNull Rectangle rectangle) {
-		return OperatorIntersects.local().execute(polygon, rectangle.polygon, sr, null);
+		return OperatorIntersects.local().execute(polygon, rectangle.polygon, null, null);
 	}
 
 	public boolean contains(@NotNull Rectangle rectangle) {
-		return OperatorContains.local().execute(polygon, rectangle.polygon, sr, null);
+		return OperatorContains.local().execute(polygon, rectangle.polygon, null, null);
 	}
 
 	public Adjacent adjacent(@NotNull Rectangle rectangle) {
 		// the two rectangles are touching
-		if (OperatorTouches.local().execute(polygon, rectangle.polygon, sr, null)) {
+		if (OperatorTouches.local().execute(polygon, rectangle.polygon, null, null)) {
 			// iterate through the four segments, which are the boundary of the rectangle, and test them against the four
 			// segments of the polygon under evaluation
 			final SegmentIterator iterator = polygon.querySegmentIterator();
@@ -66,10 +54,10 @@ public class Rectangle {
 					while (otherIterator.nextPath()) {
 						while (otherIterator.hasNextSegment()) {
 							Segment otherSegment = otherIterator.nextSegment();
-							if (OperatorEquals.local().execute(segment, otherSegment, sr, null)) {
+							if (OperatorEquals.local().execute(segment, otherSegment, null, null)) {
 								return Adjacent.Proper;
 							}
-							if (OperatorContains.local().execute(segment, otherSegment, sr, null)) {
+							if (OperatorContains.local().execute(segment, otherSegment, null, null)) {
 								return Adjacent.SubLine;
 							}
 						}
@@ -91,11 +79,11 @@ public class Rectangle {
 			return false;
 		}
 		Rectangle rectangle = (Rectangle) o;
-		return OperatorEquals.local().execute(polygon, rectangle.polygon, sr, null);
+		return OperatorEquals.local().execute(polygon, rectangle.polygon, null, null);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(polygon);
+		return polygon.hashCode();
 	}
 }
