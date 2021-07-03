@@ -47,6 +47,7 @@ class RectangleTest {
 		Rectangle r1 = new Rectangle(0, 0, 0, 3, 3, 3, 3, 0);
 		Rectangle r2 = new Rectangle(1, -1, 1, 1, 2, 1, 2, -1);
 		Rectangle r3 = new Rectangle(4, 1, 4, 2, 5, 2, 5, 1);
+
 		assertAll("intersects",
 		          () -> assertTrue(r1.intersects(r2)),
 		          () -> assertFalse(r2.intersects(r3)),
@@ -116,8 +117,9 @@ class RectangleTest {
 	@Test
 	void adjacent45() {
 		// two rectangles at 45°
-		Rectangle r1 = new Rectangle(0,2, 2, 4, 4, 2, 2, 0);
+		Rectangle r1 = new Rectangle(0, 2, 2, 4, 4, 2, 2, 0);
 		Rectangle r2 = new Rectangle(2, 0, 4, 2, 6, 0, 4, -2);
+
 		assertEquals(r1.adjacent(r2), Adjacent.Proper);
 	}
 }
