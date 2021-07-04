@@ -9,8 +9,8 @@ of Adjacency would have to be custom-written for this exercise.
 
 The [Esri Geometry API for Java][esri-geometry-api-java] is a spatial processing API designed for use-cases exactly like
 the one outlined in the exercise. It includes all the machinery, out-of-the-box, needed to provide a complete solution
-with minimal custom code. The [`Rectangle`][rectangle-entity] entity wraps the functionality provided by this API, and
-the tests verify the code meets the requirements.
+with minimal custom code. This implementation of a [`Rectangle`][rectangle-entity] entity wraps the functionality
+provided by this API, and the tests verify the code meets the requirements.
 
 ## A Note about the Requirements
 
