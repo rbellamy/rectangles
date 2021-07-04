@@ -1,23 +1,22 @@
 # Rectangles
 
-Like most software developers, I try to avoid the "Not Invented Here" syndrome. In my experience, it's rarely as simple
-as reading about it in a "Build or Buy" best practices article.
+## Rectangles and Java APIs
 
-For instance, this exercise. In taking the path I did, I choose to showcase my ability to integrate a new (for me)
-library into existing requirements, rather than attempting to meet those requirements from first principles. In doing so
-I risk missing the point of the exercise by NOT implementing the mathematical details of the geometry involved
-in `intersects`, `contains`, or `adjacent`. On the other hand, by taking that risk, I offer you a better view into my
-real-world ability to onboard a problem, dissect it, and render a working solution that CAN scale, and wasn't a heavy
-lift to get to a working prototype.
+`Rectangle`s are `Polygon`s are `Shape`s. `Rectangle`s exist in the JDK under the `java.awt.*` namespace, and would seem
+the immediate choice when designing an entity that addresses the needs of the requirements. However, the APIs in
+the `java.awt.*`s namespace have a rudimentary understanding of Adjacency. For instance, the code to determine each type
+of Adjacency would have to be custom-written for this exercise.
 
-## Requirements
+The [Esri Geometry API for Java][esri-geometry-api-java] is a spatial processing API designed for use-cases exactly like
+the one outlined in the exercise. It includes all the machinery, out-of-the-box, needed to provide a complete solution
+with minimal custom code. The [`Rectangle`][rectangle-entity] entity wraps the functionality provided by this API, and
+the tests verify the code meets the requirements.
+
+## A Note about the Requirements
 
 The requirements do not mention dealing with rectangles that are oriented off-axis, e.g., the segments of the rectangle
 are neither parallel to, nor perpendicular to, the x or y-axis. This implementation will work with rectangles of
 arbitrary orientation.
-
-The [`Rectangle`][rectangle-entity] entity wraps the functionality provided by
-the [Esri Geometry API for Java][esri-geometry-api-java], which is released under an Apache 2.0 license.
 
 ## Tests
 
